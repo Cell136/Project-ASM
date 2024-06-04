@@ -1,0 +1,118 @@
+﻿@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Identity
+@model JobApplication
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Form</title>
+</head>
+<body>
+    <div class="container1">
+        <h2>CV Form</h2>
+        <form asp-action="CreateCV" asp-controller="Home" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Title">Title</label>
+                <input asp-for="Title" type="text" placeholder="Enter title" required>
+            </div>
+            <input asp-for="UserId" type="hidden" value="@ViewBag.UserId" id="title" placeholder="Enter title" required />
+            <input asp-for="Status" type="hidden" value="Processing" id="title" placeholder="Enter title" required>
+            <div class="form-group">
+                <label>Jobs</label>
+                <select asp-for="JobId" asp-items="ViewBag.Jobs" class="custom-select">
+                    <option>--Select Job</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Introduction">Introduction</label>
+                <textarea asp-for="Introduction" id="introduction" rows="5" placeholder="Enter introduction" required></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurriculumVitae">Title</label>
+                <input asp-for="CurriculumVitae" type="file" placeholder="Enter title" accept="image/*" required>
+            </div>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm mb-3">Back to Home</a>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    .container1 {
+        width: 80%;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    .custom-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path fill="%23333" d="M4 5l-3-3h6l-3 3z"/></svg>');
+        background-repeat: no-repeat;
+        background-position-x: calc(100% - 12px);
+        background-position-y: center;
+    }
+
+        .custom-select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+</style>
+</html>

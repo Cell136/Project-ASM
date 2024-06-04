@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+@model Job
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Posting Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Job Delete Form</h2>
+        <form asp-action="DeleteJob" asp-controller="Admin">
+            <input asp-for="UserId" />
+            <div class="form-group">
+                <label asp-for="JobTitle">Job Title</label>
+                <input type="text" class="form-control" asp-for="JobTitle" placeholder="Enter job title" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Location">Location</label>
+                <input type="text" class="form-control" asp-for="Location" placeholder="Enter location" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Industry">Company</label>
+                <input type="text" class="form-control" asp-for="Industry" placeholder="Enter industry" readonly />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Requiered1">Required Skill 1</label>
+                    <input type="text" class="form-control" asp-for="Requiered1" placeholder="Enter required skill 1" readonly />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Requiered2">Required Skill 2</label>
+                    <input type="text" class="form-control" asp-for="Requiered2" placeholder="Enter required skill 2" readonly />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="LowestPrice">Lowest Price</label>
+                    <input type="number" class="form-control" asp-for="LowestPrice" placeholder="Enter lowest price" readonly />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="HighestPrice">Highest Price</label>
+                    <input type="number" class="form-control" asp-for="HighestPrice" placeholder="Enter highest price" readonly />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <input type="text" class="form-control" asp-for="Description" placeholder="Enter location" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationDeadline">Application Deadline</label>
+                <input type="date" class="form-control" asp-for="ApplicationDeadline" readonly />
+            </div>
+
+            <button type="submit" class="btn btn-danger mt-2">Delete</button>
+        </form>
+    </div>
+</body>
+</html>

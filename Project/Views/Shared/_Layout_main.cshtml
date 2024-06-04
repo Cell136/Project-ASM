@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Project</title>
+    <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/Project.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-row">
+                    <div class="header-column">
+                        <div class="header-logo">
+                            <img src="~/img/logo.webp" alt="">
+                        </div>
+                        <ul class="header-nav">
+                            <li class="header-link"><a asp-controller="Home" asp-action="Index">FIND JOB</a></li>
+                            <li class="header-link"><a asp-controller="Home" asp-action="MyCV">MY CV</a></li>
+                            <li class="header-link"><a asp-controller="Client" asp-action="Index">MY JOB</a></li>
+                        </ul>
+                    </div>
+                    <div class="header-column">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="main">
+            <section class="searching">
+                <div class="container">
+                    <form asp-controller="Home" asp-action="Search" class="search-form">
+                        <input class="search-job" name="SearchJob" type="text" placeholder="Search Job" />
+                        <input class="search-location" name="SearchLocation" type="text" placeholder="Search Location" />
+                        <button class="search-submit" type="submit">Search</button>
+                    </form>
+                </div>
+            </section>
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

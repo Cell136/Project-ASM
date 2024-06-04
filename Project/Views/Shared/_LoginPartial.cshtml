@@ -1,26 +1,32 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
+<ul class="header-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
+    <li class="header-link">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>
-    <li class="nav-item">
+    <li class="header-link">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                <button style="border:none;outline:none;font-size: 1.4rem;background:inherit;font-weight:500;" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>
     </li>
+        <li class="header-link admin">
+            <a asp-controller="Admin" asp-action="IndexUser">ADMIN</a>
+        </li>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    <li class="header-link">
+        <a asp-area="Identity" asp-page="/Account/Register">REGISTER</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    <li class="header-link">
+        <a asp-area="Identity" asp-page="/Account/Login">LOG IN</a>
+    </li>
+    <li class="header-link admin">
+       <a asp-controller="Admin" asp-action="IndexUser">ADMIN</a>
     </li>
 }
 </ul>

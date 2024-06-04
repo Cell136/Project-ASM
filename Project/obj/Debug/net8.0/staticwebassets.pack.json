@@ -5,12 +5,64 @@
       "PackagePath": "staticwebassets\\Project.bundle.scp.css"
     },
     {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\css\\layout.css",
+      "PackagePath": "staticwebassets\\css\\layout.css"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\css\\reset.css",
+      "PackagePath": "staticwebassets\\css\\reset.css"
+    },
+    {
       "Id": "C:\\New folder\\testing\\Project\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\New folder\\testing\\Project\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\30ffcc6f-7e30-4dc2-9743-53d104f61bc3_anh3.webp",
+      "PackagePath": "staticwebassets\\images\\30ffcc6f-7e30-4dc2-9743-53d104f61bc3_anh3.webp"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\3913555b-ae7a-4252-9bcf-c5d8a23b10c2_database.png",
+      "PackagePath": "staticwebassets\\images\\3913555b-ae7a-4252-9bcf-c5d8a23b10c2_database.png"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\500c37c2-76eb-4db9-a49c-a4ea7d858de2_cv-xin-viec-don-gian-careerbuilder-2.webp",
+      "PackagePath": "staticwebassets\\images\\500c37c2-76eb-4db9-a49c-a4ea7d858de2_cv-xin-viec-don-gian-careerbuilder-2.webp"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\6feb86bc-4f26-4fc3-9dfa-c80ab73db191_anh2.webp",
+      "PackagePath": "staticwebassets\\images\\6feb86bc-4f26-4fc3-9dfa-c80ab73db191_anh2.webp"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\80fc3c61-bd15-4c22-8013-0956e1d2f873_cv-xin-viec-don-gian-careerbuilder-2.webp",
+      "PackagePath": "staticwebassets\\images\\80fc3c61-bd15-4c22-8013-0956e1d2f873_cv-xin-viec-don-gian-careerbuilder-2.webp"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\8a9a7e57-ddad-47dc-951a-4d91b26356a3_21add1c73f91074805262219603486f2.webp",
+      "PackagePath": "staticwebassets\\images\\8a9a7e57-ddad-47dc-951a-4d91b26356a3_21add1c73f91074805262219603486f2.webp"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\b1afb35b-9c20-4083-901d-9cd2775d63ec_cv-xin-viec-don-gian-careerbuilder-2.webp",
+      "PackagePath": "staticwebassets\\images\\b1afb35b-9c20-4083-901d-9cd2775d63ec_cv-xin-viec-don-gian-careerbuilder-2.webp"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\f2cc61da-725c-4441-aac2-a6df70f4e92a_cv-xin-viec-don-gian-careerbuilder-2.webp",
+      "PackagePath": "staticwebassets\\images\\f2cc61da-725c-4441-aac2-a6df70f4e92a_cv-xin-viec-don-gian-careerbuilder-2.webp"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\f9fd0f72-8064-40d6-a198-e766c4a92cad_anh4.webp",
+      "PackagePath": "staticwebassets\\images\\f9fd0f72-8064-40d6-a198-e766c4a92cad_anh4.webp"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\images\\fd8c93af-00f5-4a7a-ad6b-3f7e8edd5984_anh-cv.jpg",
+      "PackagePath": "staticwebassets\\images\\fd8c93af-00f5-4a7a-ad6b-3f7e8edd5984_anh-cv.jpg"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\img\\logo.webp",
+      "PackagePath": "staticwebassets\\img\\logo.webp"
     },
     {
       "Id": "C:\\New folder\\testing\\Project\\wwwroot\\js\\site.js",
@@ -83,6 +135,22 @@
     {
       "Id": "C:\\New folder\\testing\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css.map"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css"
+    },
+    {
+      "Id": "C:\\New folder\\testing\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css.map"
     },
     {
       "Id": "C:\\New folder\\testing\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",

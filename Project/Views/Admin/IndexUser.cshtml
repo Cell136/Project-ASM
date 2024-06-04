@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Identity
+@{
+    Layout = "~/Views/Shared/_Layout_Admin_Page.cshtml";
+}
+@model IEnumerable<ApplicationUserRole>
+@{
+    ViewData["Title"] = "List Users";
+}
+
+
+<div class="content">
+    <h3>@ViewData["Title"]</h3>
+    @* <a asp-controller="Admin" asp-action="CreateUserForHuman" class="btn btn-primary btn-sm mb-3">Create New User</a> *@
+    <div class="table-container">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => user.User.Email)</td>
+                                <td>@Html.DisplayFor(model => user.Role.Name)</td>
+                                <td>
+                                <form asp-controller="Admin" asp-action="DeleteUser" method="post">
+                                    <input type="hidden" name="id" value="@user.User.Id" />
+                                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Users not available</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</div>

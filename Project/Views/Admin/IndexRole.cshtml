@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+@{
+    Layout = "~/Views/Shared/_Layout_Admin_Page.cshtml";
+}
+@model IEnumerable<ApplicationRole>
+@{
+    ViewData["Title"] = "Index Role";
+}
+<h3>@ViewData["Title"]</h3>
+
+<div class="content">
+    <h3>@ViewData["Title"]</h3>
+    <a asp-controller="Admin" asp-action="CreateRole" class="btn btn-primary btn-sm mb-3">Create New Role</a>
+    <div class="table-container">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id Role</th>
+                    <th>Name Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var role in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(model => role.Id)</td>
+                            <td>@Html.DisplayFor(model => role.Name)</td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="DeleteRole" asp-route-id="@role.Id" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3">Role not available</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+      </div>
+      </div>

@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@{
+    Layout = "~/Views/Shared/_Layout_Admin_Page.cshtml";
+}
+@model IEnumerable<Job>
+@{
+    ViewData["Title"] = "List Jobs";
+}
+<div class="content">
+    <h3>@ViewData["Title"]</h3>
+    <div class="table-container">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>JobTitle</th>
+                    <th>Company</th>
+                    <th>Salary</th>
+                    <th>Location</th>
+                    <th>Requiered</th>
+                    <th>Description</th>
+                    <th>User</th>
+                    <th>DeadLine</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var job in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(model => job.JobTitle)</td>
+                            <td>@Html.DisplayFor(model => job.Industry))</td>
+                            <td><span>@job.LowestPrice</span>$ - <span>@job.HighestPrice</span>$</td>
+                            <td>@Html.DisplayFor(model => job.Location))</td>
+                            <td><span>@job.Requiered1</span>, <span>@job.Requiered2</span></td>
+                            <td>@Html.DisplayFor(model => job.Description))</td>
+                            <td>@Html.DisplayFor(model => job.Users.Email))</td>
+                            <td>@Html.DisplayFor(model => job.ApplicationDeadline))</td>
+                            <td><a asp-asp-controller="Admin" asp-action="DeleteJob" asp-route-id="@job.Id" class="btn btn-danger btn-sm">Delete</a></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">Users not available</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

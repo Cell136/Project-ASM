@@ -1,8 +1,178 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout_main.cshtml";
 }
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Job>
+<section class="job-list">
+    <div class="container">
+        <h2 class="job-list__heading">Job List</h2>
+        <div class="job-list-row">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var job in Model)
+            {
+                <a asp-controller="Home" asp-action="DetailJob" asp-route-id="@job.Id">
+                    <div class="job-box">
+                        <div class="job-box__row">
+                            <h3 class="job-box__heading">@Html.DisplayFor(model => job.JobTitle)</h3>
+                            <p class="job-box__salary"><span>@Html.DisplayFor(model => job.LowestPrice)</span>$ - <span>@Html.DisplayFor(model => job.HighestPrice)</span>$</p>
+                        </div>
+                        <div class="job-box__exp-list">
+                            <div class="job-box__exp">
+                                <span>@Html.DisplayFor(model => job.Requiered1)</span>
+                            </div>
+                            <div class="job-box__exp">
+                                <span>@Html.DisplayFor(model => job.Requiered2)</span>
+                            </div>
+                        </div>
+                        <div class="job-box__company">
+                            <div class="job-box__company-img">
+                                <img src="~/images/@job.AvatarUrl" alt="">
+                            </div>
+                            <div class="job-box__company-desc">
+                                <p>@Html.DisplayFor(model => job.Industry)</p>
+                                <p>@Html.DisplayFor(model => job.Location)</p>
+                            </div>
+                        </div>
+                        <div class="job-box-line"></div>
+                        <div class="job-box__deadline">
+                            <p>Hot</p>
+                            <p>@Html.DisplayFor(model => job.ApplicationDeadline)</p>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            <h1>Nothing in hear</h1>
+        }
+    </div>
+    </div>
+</section>
+<style>
+    .job-list__heading {
+        font-size: 2.4rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    .job-list-row {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .job-box {
+        padding: 18px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px #ccc;
+        width: 650px;
+    }
+
+    .job-box__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .job-box__heading {
+        font-size: 2rem;
+        font-weight: 500;
+        letter-spacing: 0.25px;
+    }
+
+    .job-box__salary {
+        font-size: 2rem;
+        white-space: nowrap;
+        color: rgb(1, 126, 183);
+        font-weight: 600;
+    }
+
+    .job-box__exp-list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px
+    }
+
+    .job-box__exp {
+        background: #EEF0F3;
+        padding: 4px;
+        color: rgb(0, 0, 0);
+        line-height: normal;
+    }
+
+        .job-box__exp span {
+            font-size: 1.6rem;
+        }
+
+    .job-box__company {
+        margin-top: 22px;
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+    }
+
+    .job-box__company-img {
+        width: 116px;
+        height: 116px;
+        border: 1px solid rgb(1, 126, 183);
+        border-radius: 4px;
+    }
+
+        .job-box__company-img img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+    .job-box__company-desc {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+        .job-box__company-desc p:first-child {
+            color: rgb(1, 126, 183);
+            font-size: 1.8rem;
+            letter-spacing: 0.25px;
+        }
+
+        .job-box__company-desc p:last-child {
+            font-size: 1.8rem;
+            letter-spacing: 0.25px;
+        }
+
+    .job-box-line {
+        margin-top: 18px;
+        margin-bottom: 18px;
+        border: 1px solid #ccc;
+    }
+
+    .job-box__deadline {
+        display: flex;
+        column-gap: 20px;
+        align-items: center;
+    }
+
+        .job-box__deadline p:first-child {
+            background-color: rgb(244, 134, 32);
+            color: white;
+            display: flex;
+            font-size: 1.4rem;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .job-box__deadline p:last-child {
+            color: rgb(0, 132, 100);
+            font-weight: 500;
+            font-size: 1.4rem;
+            letter-spacing: 1.6px;
+        }
+</style>

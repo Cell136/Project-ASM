@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #333;
+            padding-top: 60px;
+        }
+
+            .sidebar a {
+                padding: 10px 20px;
+                display: block;
+                color: white;
+            }
+
+                .sidebar a:hover {
+                    background-color: #555;
+                }
+        /* Content */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a asp-controller="Home" asp-action="Index">Back to home</a>
+        <a asp-controller="Admin" asp-action="IndexRole">Roles</a>
+        <a asp-controller="Admin" asp-action="IndexUser">Users</a>
+        <a asp-controller="Admin" asp-action="JobList">Job List</a>
+    </div>
+    @RenderBody()
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_main.cshtml";
+}
+@model IEnumerable<JobApplication>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h3>@ViewData["Title"]</h3>
+        <a asp-controller="Client" asp-action="Index" class="btn btn-primary btn-sm mb-3">Back to Home</a>
+        <div class="table-container">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>CV Title</th>
+                        <th>Introduction</th>
+                        <th>Action</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var jobApplication in Model)
+                        {
+                            @if (jobApplication.JobId == ViewBag.JobId)
+                            {
+                                <tr>
+                                    <td>@jobApplication.Id</td>
+                                    <td>@jobApplication.Users.Email</td>
+                                    <td>@jobApplication.Title</td>
+                                    <td>@jobApplication.Introduction</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <form asp-controller="Client" asp-action="DetailCV">
+                                                <input type="hidden" name="jobAppId" value="@jobApplication.Id" />
+                                                <input type="hidden" name="jobId" value="@ViewBag.JobId" />
+                                                <button type="submit" class="btn btn-primary btn-sm">See CV</button>
+                                            </form>
+                                            <form asp-controller="Client" asp-action="AcceptJob">
+                                                <input type="hidden" name="jobAppId" value="@jobApplication.Id" />
+                                                <input type="hidden" name="jobId" value="@ViewBag.JobId" />
+                                                <button type="submit" class="btn btn-success btn-sm ml-2">Accept</button>
+                                            </form>
+                                            <form asp-controller="Client" asp-action="RejectJob">
+                                                <input type="hidden" name="jobAppId" value="@jobApplication.Id" />
+                                                <input type="hidden" name="jobId" value="@ViewBag.JobId" />
+                                                <button type="submit" class="btn btn-danger btn-sm ml-2">Not Accept</button>
+                                            </form>
+                                    </td>
+                                    <td>@jobApplication.Status</td>
+                                </tr>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Users not available</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+

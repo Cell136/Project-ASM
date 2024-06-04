@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+@model JobApplication
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Image</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .back-to-home {
+            position: absolute;
+            top: 20px; /* Cách top 20px */
+            left: 20px; /* Cách left 20px */
+        }
+
+        .job-application-container {
+            position: relative;
+        }
+
+        .job-application {
+            width: 800px; /* Đặt chiều dài */
+            height: 900px; /* Đặt chiều rộng */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .job-application img {
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+    </style>
+</head>
+<body>
+    <a asp-route-id="@ViewBag.JobId" asp-controller="Client" asp-action="CheckCV" class="btn btn-primary btn-sm mb-3 back-to-home">Back</a>
+    <div class="job-application-container">
+        <div class="job-application">
+            <img src="~/images/@Model.CVUrl" alt="Job Application Image">
+        </div>
+    </div>
+</body>
+</html>
+

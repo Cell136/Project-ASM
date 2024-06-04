@@ -1,0 +1,347 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_main.cshtml";
+}
+@using Microsoft.AspNetCore.Identity
+@model Project.Models.ViewModel.ViewModelDetailJob
+<section class="detail__job">
+    <div class="container">
+        @if(Model.job != null) {
+        <div class="detail__job-inner">
+            <div class="detail__job-column-left">
+                <div class="detail__job-column-left-main">
+                    <div class="detail__job-img">
+                            <img src="~/images/@Model.job.AvatarUrl" alt="">
+                    </div>
+                    <div class="detail__job-section-main">
+                        <h2 class="detail__job-heading">
+                            @Model.job.JobTitle
+                        </h2>
+                        <p class="detail__job-company">@Model.job.Industry</p>
+                        <p class="detail__job-salary">Salary: <span>@Model.job.LowestPrice</span>$ - <span>@Model.job.HighestPrice</span>$</p>
+                        <p class="detail__job-exp">@Model.job.Location</p>
+                        <p class="detail__job-exp">- @Model.job.Requiered1</p>
+                        <p class="detail__job-exp">- @Model.job.Requiered2</p>
+                        <p class="detail__job-exp">- Tối thiểu Cử Nhân</p>
+                        <p class="detail__job-hot">Hot</p>
+                        <p class="detail__job-deadline">Deadline: @Model.job.ApplicationDeadline</p>
+                            <a asp-controller="Client" asp-action="CheckCV" asp-route-id="@Model.job.Id" class="detail__job-apply">See CVs</a>
+                    </div>
+                </div>
+                <div class="detail__job-line"></div>
+                <h4 class="detail__job-desc">Job description</h4>
+                <div class="detail__job-exp-list">
+                    <p class="">@Model.job.Requiered1</p>
+                    <p class="">@Model.job.Requiered2</p>
+                    <p class="">Tối thiểu Cử Nhân</p>
+                </div>
+                <p class="detail__job-more">
+                    @Model.job.Description
+                </p>
+            </div>
+
+
+            <div class="deatail__job-column-right">
+                <h3 class="other-job">Other Jobs</h3>
+                <div class="other-job-list">
+                    @if (Model.JobList != null && Model.JobList.Any())
+                    {   
+                        @foreach(var otherJob in Model.JobList)
+                        {
+                            @if (otherJob.Id != Model.job.Id)
+                            {
+                                <a asp-controller="Client" asp-action="DetailJob" asp-route-id="@otherJob.Id">
+                                    <div class="other-job-section">
+                                        <div class="other-job-section-main">
+                                            <div class="other-job-section-img">
+                                                <img src="~/images/@otherJob.AvatarUrl" alt="">
+                                            </div>
+                                            <div class="other-job-section-desc">
+                                                <h2 class="other-job__heading">
+                                                    @otherJob.JobTitle
+                                                </h2>
+                                                <p class="other-job__company">@otherJob.Industry</p>
+                                                <p class="other-job-location">@otherJob.Location</p>
+                                                <p class="other-job__salary"><span>@otherJob.LowestPrice</span>$ - <span>@otherJob.HighestPrice</span>$</p>
+                                                <p class="other-job-exp">Tối thiểu Cử Nhân</p>
+                                            </div>
+                                        </div>
+                                        <div class="other-job__line"></div>
+                                        <p class="other-job-deadline">Deadline: @otherJob.ApplicationDeadline</p>
+                                    </div>
+                                </a>
+                            }
+                        }
+                    }
+
+                </div>
+            </div>
+            </div>
+        } else
+        {
+            <h1>Nothing in here</h1>
+        }
+            <div class="edit-button">
+            <a asp-controller="Client" asp-action="EditJob" asp-route-id="@ViewBag.JobId" class="edit-button__btn">Edit</a>
+            <a asp-controller="Client" asp-action="DeleteJob" asp-route-id="@ViewBag.JobId" class="delete-button__btn">Delete</a>
+        </div>
+        
+    </div>
+</section>
+<style>
+    .detail__job-inner {
+        display: flex;
+    }
+
+    .detail__job-column-left {
+        width: 780px;
+        padding: 10px;
+    }
+
+    .detail__job-column-left-main {
+        display: flex;
+        gap: 20px;
+    }
+
+    .detail__job-img {
+        width: 116px;
+        height: 116px;
+        border: 1px solid rgb(1, 126, 183);
+        border-radius: 4px;
+    }
+
+        .detail__job-img img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+    .detail__job-heading {
+        font-size: 2.4rem;
+        font-weight: 500;
+        margin-bottom: 14px;
+    }
+
+    .detail__job-company {
+        color: rgb(1, 126, 183);
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        margin-bottom: 14px;
+    }
+
+    .detail__job-salary {
+        font-size: 1.8rem;
+        margin-bottom: 14px;
+    }
+
+    .detail__job-exp {
+        font-size: 1.8rem;
+        margin-bottom: 14px;
+    }
+
+    .detail__job-hot {
+        display: inline-block;
+        margin-left: 5px;
+        text-transform: uppercase;
+        background: #ff7a00;
+        font-weight: 700;
+        border-radius: 60px;
+        padding: 4px 10px;
+        color: rgb(255, 255, 255);
+        margin-bottom: 14px;
+    }
+
+    .detail__job-deadline {
+        font-size: 1.8rem;
+        color: rgb(0, 132, 100);
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .detail__job-apply {
+        display: inline-block;
+        text-align:center;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        padding: 10px 20px;
+        height: 40px;
+        min-width: 156px;
+        border-radius: 0px;
+        background-color: rgb(1, 126, 183);
+        color: rgb(255, 255, 255);
+        border: none;
+        text-transform: uppercase;
+        outline: none;
+        cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 32px;
+    }
+
+        .detail__job-apply:hover {
+            opacity: 0.7;
+        }
+
+    .detail__job-line {
+        border-top: 1px solid #ccc;
+        margin-bottom: 32px;
+    }
+
+    .detail__job-desc {
+        color: rgb(0, 0, 0);
+        line-height: normal;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .detail__job-exp-list {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 48px;
+    }
+
+        .detail__job-exp-list p {
+            padding: 6px 6px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.25);
+            transition: color 0.2s ease 0s;
+        }
+
+    .detail__job-more {
+        font-size: 1.4rem;
+        line-height: 1.8;
+    }
+
+    .deatail__job-column-right {
+        padding: 10px;
+    }
+
+    /* other-job */
+    .other-job {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .other-job-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .other-job-section-main {
+        display: flex;
+    }
+
+    .other-job-section-img {
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+    }
+
+        .other-job-section-img img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+    .other-job-section {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .other-job__heading {
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .other-job__company {
+        font-size: 1.4rem;
+        color: rgb(1, 126, 183);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .other-job-location {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+    }
+
+    .other-job__salary {
+        font-size: 1.3rem;
+        white-space: nowrap;
+        color: rgb(1, 126, 183);
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .other-job-exp {
+        font-size: 1.4rem;
+    }
+
+    .other-job__line {
+        margin-top: 10px;
+        border-top: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+    /* CSS cho nút chỉnh sửa */
+    .edit-button {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        z-index: 9999;
+    }
+
+    .edit-button__btn {
+        display: inline-block;
+        text-align: center;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        padding: 10px 20px;
+        height: 40px;
+        min-width: 156px;
+        border-radius: 0px;
+        background-color: rgb(1, 126, 183);
+        color: rgb(255, 255, 255);
+        border: none;
+        text-transform: uppercase;
+        outline: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+        .edit-button__btn:hover {
+            opacity: 0.7;
+        }
+    /* CSS cho nút xóa */
+    .delete-button {
+        position: fixed;
+        bottom: 40px;
+        right: 120px; /* Điều chỉnh vị trí của nút xóa */
+        z-index: 9999;
+    }
+
+    .delete-button__btn {
+        display: inline-block;
+        text-align: center;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        padding: 10px 20px;
+        height: 40px;
+        min-width: 156px;
+        border-radius: 0px;
+        background-color: #ff3b30; /* Màu đỏ */
+        color: rgb(255, 255, 255);
+        border: none;
+        text-transform: uppercase;
+        outline: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+        .delete-button__btn:hover {
+            opacity: 0.7;
+        }
+</style>

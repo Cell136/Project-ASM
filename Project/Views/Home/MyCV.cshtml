@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_main.cshtml";
+}
+@model Project.Models.ViewModel.ViewModelJobAndCV
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h3>@ViewData["Title"]</h3>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm mb-3">Back to Home</a>
+        <a asp-controller="Home" asp-action="CreateCVFromList" class="btn btn-primary btn-sm mb-3">Create New CV</a>
+        <div class="table-container">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>CV Title</th>
+                        <th>Introduction</th>
+                        <th>Apply Job</th>
+                        <th>Action</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.jobApplication != null && Model.jobApplication.Any())
+                    {
+                        @foreach (var jobApplication in Model.jobApplication) {
+                            <tr>
+                                <td>@jobApplication.Title</td>
+                                <td>@jobApplication.Introduction</td>
+                                @foreach(var job in Model.job)
+                                {
+                                    @if (jobApplication.JobId == job.Id)
+                                    {
+                                        <td>@job.JobTitle</td>
+                                    }
+                                }
+                                <th>
+                                    <a asp-controller="Home" asp-action="DetailCV" asp-route-id="@jobApplication.Id" class="btn btn-primary btn-sm">See CV</a>
+                                    <a asp-controller="Home" asp-action="DeleteJobApp" asp-route-id="@jobApplication.Id" class="btn btn-danger btn-sm">Delete</a>
+                                </th>
+                                <th>@jobApplication.Status</th>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Users not available</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
