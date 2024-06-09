@@ -22,7 +22,7 @@
                         <p class="detail__job-exp">- @Model.job.Requiered1</p>
                         <p class="detail__job-exp">- @Model.job.Requiered2</p>
                         <p class="detail__job-exp">- Tối thiểu Cử Nhân</p>
-                        <p class="detail__job-hot">Hot</p>
+                        <p class="detail__job-verified">Verified</p>
                         <p class="detail__job-deadline">Deadline: @Model.job.ApplicationDeadline</p>
                             <a asp-controller="Client" asp-action="CheckCV" asp-route-id="@Model.job.Id" class="detail__job-apply">See CVs</a>
                     </div>
@@ -137,7 +137,7 @@
         margin-bottom: 14px;
     }
 
-    .detail__job-hot {
+    .detail__job-verified {
         display: inline-block;
         margin-left: 5px;
         text-transform: uppercase;
