@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 
 namespace Project.Controllers
 {
@@ -17,18 +20,21 @@ namespace Project.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
+
         public HomeController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
             var jobs = _context.Jobs.ToList();
             return View(jobs);
         }
+
         [HttpGet]
         public IActionResult DetailJob(int? id)
         {
@@ -41,27 +47,30 @@ namespace Project.Controllers
             };
             return View(viewmodel);
         }
+
         [HttpPost]
         public IActionResult Search(string SearchJob, string SearchLocation)
         {
             var jobSearch = _context.Jobs.ToList();
-            if(!String.IsNullOrEmpty(SearchJob) && String.IsNullOrEmpty(SearchLocation))
+            if (!String.IsNullOrEmpty(SearchJob) && String.IsNullOrEmpty(SearchLocation))
             {
                 jobSearch = jobSearch.Where(n => n.JobTitle.Contains(SearchJob)).ToList();
             }
-            else if(!String.IsNullOrEmpty(SearchLocation) && String.IsNullOrEmpty(SearchJob))
+            else if (!String.IsNullOrEmpty(SearchLocation) && String.IsNullOrEmpty(SearchJob))
             {
                 jobSearch = jobSearch.Where(n => n.Location.Contains(SearchLocation)).ToList();
             }
-            else if(!String.IsNullOrEmpty(SearchLocation) && !String.IsNullOrEmpty(SearchJob))
+            else if (!String.IsNullOrEmpty(SearchLocation) && !String.IsNullOrEmpty(SearchJob))
             {
                 jobSearch = jobSearch.Where(n => n.JobTitle.Contains(SearchJob) && n.Location.Contains(SearchLocation)).ToList();
-            } else
+            }
+            else
             {
                 return View(jobSearch);
             }
-            return View(jobSearch); 
+            return View(jobSearch);
         }
+
         [NonAction]
         private string UploadedFile(JobApplication model)
         {
@@ -80,12 +89,14 @@ namespace Project.Controllers
             }
             return uniqueFileName;
         }
+
         [NonAction]
         private void LoadJob()
         {
             var jobs = _context.Jobs.ToList();
             ViewBag.Jobs = new SelectList(jobs, "Id", "JobTitle");
         }
+
         [HttpGet]
         public IActionResult CreateCVFromList()
         {
@@ -94,6 +105,7 @@ namespace Project.Controllers
             LoadJob();
             return View();
         }
+
         [HttpGet]
         [Authorize(Roles = "Seeker")]
         public IActionResult CreateCV(int? id)
@@ -104,6 +116,7 @@ namespace Project.Controllers
             ViewBag.UserId = user;
             return View();
         }
+
         [HttpPost]
         public IActionResult CreateCV(JobApplication model)
         {
@@ -154,7 +167,7 @@ namespace Project.Controllers
             }
             string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", jobApplication.CVUrl);
 
-            // Kiểm tra xem tập tin ảnh cũ có tồn tại không và sau đó xóa nó
+            // Check if the old image file exists and delete it
             if (System.IO.File.Exists(oldImagePath))
             {
                 System.IO.File.Delete(oldImagePath);
@@ -163,5 +176,62 @@ namespace Project.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(MyCV));
         }
+
+        [HttpGet]
+        public IActionResult EditCV(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var jobApplication = _context.JobApplications.Find(id);
+            if (jobApplication == null)
+            {
+                return NotFound();
+            }
+
+            var user = _userManager.GetUserId(User);
+            ViewBag.UserId = user;
+            ViewBag.JobId = jobApplication.JobId;
+            LoadJob();
+            return View(jobApplication);
+        }
+
+        // POST: Home/EditCV/5
+        [HttpPost]
+        public IActionResult EditCV(int id, JobApplication model)
+        {
+            var jobApplication = _context.JobApplications.FirstOrDefault(j => j.Id == id);
+            if (jobApplication == null)
+            {
+                return NotFound();
+            }
+
+            string uniqueFileName = jobApplication.CVUrl;
+            if (model.CurriculumVitae != null)
+            {
+                string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", jobApplication.CVUrl);
+
+                // Check if the old image file exists and delete it
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+
+                uniqueFileName = UploadedFile(model);
+            }
+
+            jobApplication.Title = model.Title;
+            jobApplication.Status = model.Status;
+            jobApplication.JobId = model.JobId;
+            jobApplication.Introduction = model.Introduction;
+            jobApplication.CVUrl = uniqueFileName;
+            jobApplication.UserId = model.UserId;
+
+            _context.SaveChanges();
+            return RedirectToAction(nameof(MyCV));
+        }
+
     }
 }

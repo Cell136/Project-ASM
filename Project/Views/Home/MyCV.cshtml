@@ -2,6 +2,7 @@
     Layout = "~/Views/Shared/_Layout_main.cshtml";
 }
 @model Project.Models.ViewModel.ViewModelJobAndCV
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,29 +30,31 @@
                 <tbody>
                     @if (Model.jobApplication != null && Model.jobApplication.Any())
                     {
-                        @foreach (var jobApplication in Model.jobApplication) {
+                        @foreach (var jobApplication in Model.jobApplication)
+                        {
                             <tr>
                                 <td>@jobApplication.Title</td>
                                 <td>@jobApplication.Introduction</td>
-                                @foreach(var job in Model.job)
+                                @foreach (var job in Model.job)
                                 {
                                     @if (jobApplication.JobId == job.Id)
                                     {
                                         <td>@job.JobTitle</td>
                                     }
                                 }
-                                <th>
+                                <td>
                                     <a asp-controller="Home" asp-action="DetailCV" asp-route-id="@jobApplication.Id" class="btn btn-primary btn-sm">See CV</a>
+                                    <a asp-controller="Home" asp-action="EditCV" asp-route-id="@jobApplication.Id" class="btn btn-warning btn-sm">Edit CV</a>
                                     <a asp-controller="Home" asp-action="DeleteJobApp" asp-route-id="@jobApplication.Id" class="btn btn-danger btn-sm">Delete</a>
-                                </th>
-                                <th>@jobApplication.Status</th>
+                                </td>
+                                <td>@jobApplication.Status</td>
                             </tr>
                         }
                     }
                     else
                     {
                         <tr>
-                            <td colspan="4">Users not available</td>
+                            <td colspan="5">No job applications available</td>
                         </tr>
                     }
                 </tbody>
